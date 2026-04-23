@@ -113,6 +113,8 @@ Here is a list of the languages currently supported.
 +--------------------+--------------------------------------------------------------+--------------------+
 |OCaml [2]           |tuareg-mode, neocaml-mode, neocaml-interface-mode             |v0.24.2             |
 +--------------------+--------------------------------------------------------------+--------------------+
+|Rust                |rust-mode, rust-ts-mode                                       |v0.20.4             |
++--------------------+--------------------------------------------------------------+--------------------+
 
 
 *Don't see your language? If you want your favourite language added, then why not try it yourself? Have a look at ``combobulate-json.el`` for an example.*

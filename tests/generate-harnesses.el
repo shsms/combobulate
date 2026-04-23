@@ -178,6 +178,39 @@
                   :mock-proffer-choices (1 1))))
   (combobulate-test-suite
     :harness-factory #'combobulate-test-harness-envelope
+    :fixture-files '("fixtures/envelope/blank.rs")
+    :collection-name "combobulate-envelope-expand-rust"
+    :action-body '((combobulate-envelope-expand-instructions instructions))
+    :per-marker nil
+    :reverse nil
+    :harness-factory-matrix
+    '((:test-name "rust-let-binding"
+                  :instructions ("let " (p name "Name") " = " @ r> ";" n>)
+                  :mock-prompt-actions ("x")
+                  :mock-registers ((region . "42"))
+                  :mock-proffer-choices (0))
+      (:test-name "rust-if-with-region"
+                  :instructions ("if " (p cond "Condition") " {" n>
+                                 (choice* :missing nil :rest (r> n>) :name "if-block")
+                                 "}" > n>)
+                  :mock-prompt-actions ("x > 0")
+                  :mock-registers ((region . "do_thing();"))
+                  :mock-proffer-choices (0))
+      (:test-name "rust-for-loop"
+                  :instructions ("for " (p var "Variable") " in " (p iter "Iterator") " {" n>
+                                 @ r> n> "}" > n>)
+                  :mock-prompt-actions ("0..10" "i")
+                  :mock-registers ((region . "println!(\"{}\", i);"))
+                  :mock-proffer-choices (0 0))
+      (:test-name "rust-match-single-arm"
+                  :instructions ("match " (p expr "Expression") " {" n>
+                                 (p pat "Pattern") " => " @ r> "," n>
+                                 "}" > n>)
+                  :mock-prompt-actions ("None" "value")
+                  :mock-registers ((region . "return nothing()"))
+                  :mock-proffer-choices (0))))
+  (combobulate-test-suite
+    :harness-factory #'combobulate-test-harness-envelope
     :fixture-files '("fixtures/envelope/blank.ml")
     :collection-name "combobulate-envelope-expand-ocaml"
     :action-body '((combobulate-envelope-expand-instructions instructions))

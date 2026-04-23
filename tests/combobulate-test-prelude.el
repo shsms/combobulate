@@ -38,6 +38,7 @@
 (require 'json-ts-mode)
 (require 'tuareg)
 (require 'tuareg-treesit)
+(require 'rust-ts-mode)
 
 ;;; Helpers for writing procedures
 

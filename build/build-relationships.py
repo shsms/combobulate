@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-import requests
 from pathlib import Path
 import itertools
 import argparse
@@ -213,6 +212,7 @@ def load_json(source):
 
 
 def download_source(source, output_filename, url):
+    import requests
     log.info("Downloading source %s. Output filename: %s", source, output_filename)
     r = requests.get(url)
     r.raise_for_status()
